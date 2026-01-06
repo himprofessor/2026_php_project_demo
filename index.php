@@ -17,7 +17,7 @@
 
         $conn_state = "mysql:host=" . DB_SERVER . ";dbname=" . DBNAME;
         $conn = new PDO($conn_state, USERNAME, "");
-        echo "Database connected...";
+        echo "Database connected success fully.";
     }catch(PDOException $error){
         echo "Connection fialed: " . $error->getMessage();
     }
