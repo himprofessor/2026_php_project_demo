@@ -17,10 +17,21 @@
 
         $conn_state = "mysql:host=" . DB_SERVER . ";dbname=" . DBNAME;
         $conn = new PDO($conn_state, USERNAME, "");
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo "Database connected...";
     }catch(PDOException $error){
         echo "Connection fialed: " . $error->getMessage();
     }
+
+    // get all data from table tasks
+    $sql = "SELECT * FROM tasks";
+    // prepare query to select data 
+    $stmt = $conn->prepare($sql);
+    var_dump($stmt);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+
+    var_dump($result);
     ?>
 </body>
 </html>
