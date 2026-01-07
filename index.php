@@ -27,11 +27,35 @@
     $sql = "SELECT * FROM tasks";
     // prepare query to select data 
     $stmt = $conn->prepare($sql);
-    var_dump($stmt);
     $stmt->execute();
-    $result = $stmt->fetchAll();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    var_dump($result);
+    foreach($result as $task){
+        echo $task["title"];
+    }
     ?>
+
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Completed</th>
+            <th>Deadline</th>
+            <th>Created date</th>
+        </thead>
+        <tbody>
+            <?php foreach($result as $task) {?>
+                <tr>
+                    <td><?php echo $task["id"];?></td>
+                    <td><?php echo $task["title"];?></td>
+                    <td><?php echo $task["description"];?></td>
+                    <td><?php echo $task["is_completed"];?></td>
+                    <td><?php echo $task["deadline"];?></td>
+                    <td><?php echo $task["created_date"];?></td>
+                </tr>
+            <?php }?>
+        </tbody>
+    </table>
 </body>
 </html>
