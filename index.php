@@ -1,40 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo list app</title>
-</head>
-<body>
+<?php require_once("database/connection.php");?>
+<?php require_once("partials/head.php")?>
     <h1>Todo list app</h1>
-
+    <a href="views/formAddTask.php">Add tasks</a>
     <?php
-    try{
-        define("USERNAME", "root");
-        define("DBNAME", "todo_list");
-        define("DB_PWD", "");
-        define("DB_SERVER", "localhost");
-
-        $conn_state = "mysql:host=" . DB_SERVER . ";dbname=" . DBNAME;
-        $conn = new PDO($conn_state, USERNAME, "");
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Database connected...";
-    }catch(PDOException $error){
-        echo "Connection fialed: " . $error->getMessage();
-    }
-
     // get all data from table tasks
     $sql = "SELECT * FROM tasks";
     // prepare query to select data 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach($result as $task){
-        echo $task["title"];
-    }
     ?>
-
     <table>
         <thead>
             <th>ID</th>
@@ -57,5 +32,4 @@
             <?php }?>
         </tbody>
     </table>
-</body>
-</html>
+<?php require_once("partials/footer.php");?>
