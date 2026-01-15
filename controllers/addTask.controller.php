@@ -12,7 +12,6 @@ try {
 
     $sql = "INSERT INTO tasks (title, description, is_completed, created_date, deadline)
 VALUES (:title,:description, :is_completed, :created_date, :deadline)";
-
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':description', $desc);
     $stmt->bindParam(':title', $title);
